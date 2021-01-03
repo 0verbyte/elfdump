@@ -103,3 +103,6 @@ GitHub.sublime-settings
 *.exe
 *.out
 *.app
+
+# Builds
+build/
