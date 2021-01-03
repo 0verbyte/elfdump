@@ -57,6 +57,9 @@ bh_unicode_properties.cache
 # https://packagecontrol.io/packages/sublime-github
 GitHub.sublime-settings
 
+# LSP cache
+.cache/
+
 *~
 
 # temporary files which can be created if a process still has a handle open of a deleted file
@@ -106,3 +109,10 @@ GitHub.sublime-settings
 
 # Builds
 build/
+
+# Testing files related to ELF executable generation
+scripts/main
+scripts/main.go
+
+# Used by clangd
+compile_commands.json
