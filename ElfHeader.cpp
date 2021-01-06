@@ -12,8 +12,9 @@ ElfHeader::ElfHeader(std::ifstream &f) {
   }
 
   // Class architecture.
-  if (e_ident[EI_CLASS] == 0 ||
-      (e_ident[EI_CLASS] != 1 && e_ident[EI_CLASS] != 2)) {
+  if (e_ident[EI_CLASS] == ArchClass::Unknown ||
+      (e_ident[EI_CLASS] != ArchClass::Bit32 &&
+       e_ident[EI_CLASS] != ArchClass::Bit64)) {
     throw std::runtime_error("Invalid class architecture");
   }
 
@@ -21,12 +22,18 @@ ElfHeader::ElfHeader(std::ifstream &f) {
   f.read(reinterpret_cast<char *>(&e_type), sizeof(e_type));
 }
 
-bool ElfHeader::is32Bit() const { return e_ident[EI_CLASS] == 1; }
+bool ElfHeader::is32Bit() const {
+  return e_ident[EI_CLASS] == ArchClass::Bit32;
+}
 
 bool ElfHeader::is64Bit() const {
   // Assume 64-bit if not 32-bit since other class architectures are already
   // handled
   return !is32Bit();
+}
+
+ArchClass ElfHeader::archClass() const {
+  return static_cast<ArchClass>(e_ident[EI_CLASS]);
 }
 
 unsigned short int ElfHeader::type() const { return e_type; }

@@ -1,6 +1,7 @@
 #ifndef ELF_HEADER_H
 #define ELF_HEADER_H
 
+#include <ArchClass.h>
 #include <cstring>
 #include <fstream>
 #include <iostream>
@@ -17,6 +18,7 @@ public:
 
   bool is32Bit() const;
   bool is64Bit() const;
+  ArchClass archClass() const;
 
   unsigned short int type() const;
 
