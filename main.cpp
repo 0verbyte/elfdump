@@ -1,4 +1,5 @@
 #include <ElfHeader.h>
+#include <ObjectFileType.h>
 #include <fstream>
 
 void print_elf_header(const ElfDump::ElfHeader &header) {
@@ -8,9 +9,28 @@ void print_elf_header(const ElfDump::ElfHeader &header) {
     std::cout << "64-bit ";
   }
 
-  if (header.type() == 2) {
-    std::cout << "executable";
+  switch (header.type()) {
+  case ElfDump::ObjectFileType::Relocatable:
+    std::cout << "Relocatable";
+    break;
+
+  case ElfDump::ObjectFileType::Executable:
+    std::cout << "Executable";
+    break;
+
+  case ElfDump::ObjectFileType::Shared:
+    std::cout << "Shared";
+    break;
+
+  case ElfDump::ObjectFileType::Core:
+    std::cout << "Core";
+    break;
+
+  default:
+    std::cout << "Type is not currently supported: " << header.type();
   }
+
+  std::cout << "\n";
 }
 
 int main(int argc, char **argv) {

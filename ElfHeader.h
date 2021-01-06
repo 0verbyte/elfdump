@@ -2,6 +2,7 @@
 #define ELF_HEADER_H
 
 #include <ArchClass.h>
+#include <ObjectFileType.h>
 #include <cstring>
 #include <fstream>
 #include <iostream>
@@ -20,7 +21,7 @@ public:
   bool is64Bit() const;
   ArchClass archClass() const;
 
-  unsigned short int type() const;
+  ObjectFileType type() const;
 
 private:
   // Structure to hold the ELF initial bytes for identification.

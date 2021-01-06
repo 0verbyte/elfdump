@@ -36,4 +36,6 @@ ArchClass ElfHeader::archClass() const {
   return static_cast<ArchClass>(e_ident[EI_CLASS]);
 }
 
-unsigned short int ElfHeader::type() const { return e_type; }
+ObjectFileType ElfHeader::type() const {
+  return static_cast<ObjectFileType>(e_type);
+}
